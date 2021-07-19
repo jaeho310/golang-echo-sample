@@ -13,22 +13,22 @@ func (UserServiceImpl) NewUserServiceImpl(repository repository.UserRepository) 
 	return &UserServiceImpl{repository}
 }
 
-func (userServiceImpl UserServiceImpl) GetUsers() ([]*model.User, error) {
+func (userServiceImpl *UserServiceImpl) GetUsers() ([]*model.User, error) {
 	return userServiceImpl.UserRepository.FindAll()
 }
 
-func (userServiceImpl UserServiceImpl) CreateUser(user *model.User) (*model.User, error) {
+func (userServiceImpl *UserServiceImpl) CreateUser(user *model.User) (*model.User, error) {
 	return userServiceImpl.UserRepository.Save(user)
 }
 
-func (userServiceImpl UserServiceImpl) DeleteUser(id int) error {
+func (userServiceImpl *UserServiceImpl) DeleteUser(id int) error {
 	return userServiceImpl.UserRepository.DeleteById(id)
 }
 
-func (userServiceImpl UserServiceImpl) GetUser(id int) (*model.User, error) {
+func (userServiceImpl *UserServiceImpl) GetUser(id int) (*model.User, error) {
 	return userServiceImpl.UserRepository.FindById(id)
 }
 
-func (userServiceImpl UserServiceImpl) UpdateUser(user *model.User) (*model.User, error) {
+func (userServiceImpl *UserServiceImpl) UpdateUser(user *model.User) (*model.User, error) {
 	return userServiceImpl.UserRepository.Update(user)
 }

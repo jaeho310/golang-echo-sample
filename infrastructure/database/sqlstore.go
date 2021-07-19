@@ -11,12 +11,22 @@ import (
 type SqlStore struct {
 }
 
-func (SqlStore) Getdb() *gorm.DB {
-	return connection()
+func (SqlStore) GetDb() *gorm.DB {
+	db, err := gorm.Open(os.Getenv("DATASOURCE_DRIVER"), os.Getenv("DATASOURCE_URL"))
+
+	db.LogMode(true)
+
+	if err != nil {
+		panic(err)
+	}
+
+	migrate(db)
+
+	return db
 }
 
-func connection() *gorm.DB {
-	db, err := gorm.Open(os.Getenv("DATASOURCE_DRIVER"), os.Getenv("DATASOURCE_URL"))
+func (SqlStore) GetMockDb() *gorm.DB {
+	db, err := gorm.Open("sqlite3", "./mock.db")
 
 	db.LogMode(true)
 
