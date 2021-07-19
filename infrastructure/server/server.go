@@ -2,7 +2,8 @@ package server
 
 import (
 	"github.com/jinzhu/gorm"
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
+	echoSwagger "github.com/swaggo/echo-swagger"
 	"html/template"
 	"io"
 	"platform-sample/controller/api"
@@ -19,6 +20,11 @@ type TemplateRenderer struct {
 	templates *template.Template
 }
 
+// @title Todo Application
+// @description This is a todo list management application
+// @version 1.0
+// @host localhost:8395
+// @BasePath /api/users
 func (server Server) Init() {
 	e := echo.New()
 
@@ -33,6 +39,9 @@ func (server Server) Init() {
 	// api controller setting
 	userController := server.injectUserController()
 	userController.Init(e.Group("/api/users"))
+
+	// swagger setting
+	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
 	e.Logger.Fatal(e.Start(":8395"))
 }

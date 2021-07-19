@@ -7,7 +7,6 @@ import (
 	"platform-sample/infrastructure/server"
 )
 
-
 func init() {
 	godotenv.Load(".env.profile")
 	godotenv.Load(".env." + os.Getenv("GO_PROFILE"))
