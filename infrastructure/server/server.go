@@ -33,7 +33,7 @@ func (server Server) Init() {
 	web.WebController{}.Init(e)
 
 	// api controller setting
-	userController := server.injectUserController()
+	userController := server.InjectUserController()
 	userController.Init(e.Group("/api/users"))
 
 	// swagger setting
@@ -60,19 +60,18 @@ func (server Server) contextDB(db *gorm.DB) echo.MiddlewareFunc {
 	}
 }
 
-func (server Server) injectDb() *gorm.DB {
+func (server Server) InjectDb() *gorm.DB {
 	return server.MainDb
 }
 
-func (server Server) injectUserRepository() *database.UserRepositoryImpl {
-	return database.UserRepositoryImpl{}.NewUserRepositoryImpl(server.injectDb())
+func (server Server) InjectUserRepository() *database.UserRepositoryImpl {
+	return database.UserRepositoryImpl{}.NewUserRepositoryImpl(server.InjectDb())
 }
 
-func (server Server) injectUserService() *service.UserServiceImpl {
-	return service.UserServiceImpl{}.NewUserServiceImpl(server.injectUserRepository())
+func (server Server) InjectUserService() *service.UserServiceImpl {
+	return service.UserServiceImpl{}.NewUserServiceImpl(server.InjectUserRepository())
 }
 
-func (server Server) injectUserController() *api.UserController {
-	return api.UserController{}.NewUserController(server.injectUserService())
+func (server Server) InjectUserController() *api.UserController {
+	return api.UserController{}.NewUserController(server.InjectUserService())
 }
-

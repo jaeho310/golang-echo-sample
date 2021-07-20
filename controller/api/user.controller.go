@@ -18,11 +18,11 @@ func (UserController) NewUserController(service service.UserService) *UserContro
 }
 
 func (userController *UserController) Init(e *echo.Group) {
-	e.POST("", userController.createUser)
-	e.GET("", userController.getUsers)
-	e.DELETE("/:id", userController.deleteUser)
-	e.GET("/:id", userController.getUser)
-	e.PATCH("", userController.updateUser)
+	e.POST("", userController.CreateUser)
+	e.GET("", userController.GetUsers)
+	e.DELETE("/:id", userController.DeleteUser)
+	e.GET("/:id", userController.GetUser)
+	e.PATCH("", userController.UpdateUser)
 }
 
 // @Summary Create user
@@ -32,7 +32,7 @@ func (userController *UserController) Init(e *echo.Group) {
 // @Param user body model.User true "body of the user"
 // @Success 203 {object} model.User
 // @Router /users [post]
-func (userController *UserController) createUser(c echo.Context) error {
+func (userController *UserController) CreateUser(c echo.Context) error {
 	user := &model.User{}
 	bindErr := c.Bind(user)
 	if bindErr != nil {
@@ -52,7 +52,7 @@ func (userController *UserController) createUser(c echo.Context) error {
 // @Produce json
 // @Success 200 {object} model.User
 // @Router /users [get]
-func (userController *UserController) getUsers(c echo.Context) error {
+func (userController *UserController) GetUsers(c echo.Context) error {
 	users, err := userController.UserService.GetUsers()
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
@@ -68,7 +68,7 @@ func (userController *UserController) getUsers(c echo.Context) error {
 // @Param id path string true "id of the user"
 // @Success 204 {object} model.User
 // @Router /users/{id} [delete]
-func (userController *UserController) deleteUser(c echo.Context) error {
+func (userController *UserController) DeleteUser(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err)
@@ -79,7 +79,7 @@ func (userController *UserController) deleteUser(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
 
-	return c.JSON(http.StatusOK,nil)
+	return c.JSON(http.StatusOK, nil)
 }
 
 // @Summary Get user
@@ -89,7 +89,7 @@ func (userController *UserController) deleteUser(c echo.Context) error {
 // @Param id path string true "id of the user"
 // @Success 200 {object} model.User
 // @Router /users/{id} [get]
-func (userController *UserController) getUser(c echo.Context) error {
+func (userController *UserController) GetUser(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err)
@@ -99,7 +99,7 @@ func (userController *UserController) getUser(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
-	return c.JSON(http.StatusOK,user)
+	return c.JSON(http.StatusOK, user)
 }
 
 // @Summary Update user
@@ -109,7 +109,7 @@ func (userController *UserController) getUser(c echo.Context) error {
 // @Param name body model.User true "body of the user"
 // @Success 201 {object} model.User
 // @Router /users [patch]
-func (userController *UserController) updateUser(c echo.Context) error {
+func (userController *UserController) UpdateUser(c echo.Context) error {
 	user := &model.User{}
 	bindErr := c.Bind(user)
 	if bindErr != nil {

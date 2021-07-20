@@ -18,7 +18,7 @@ func init() {
 // @host localhost:8395
 // @BasePath /api
 func main() {
-	db := database.SqlStore{}.Getdb()
+	db := database.SqlStore{}.GetDb()
 	defer db.Close()
 
 	server.Server{MainDb: db}.Init()
