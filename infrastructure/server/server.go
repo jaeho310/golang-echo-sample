@@ -8,6 +8,7 @@ import (
 	"io"
 	"platform-sample/controller/api"
 	"platform-sample/controller/web"
+	_ "platform-sample/docs"
 	"platform-sample/infrastructure/database"
 	"platform-sample/service"
 )
@@ -20,11 +21,6 @@ type TemplateRenderer struct {
 	templates *template.Template
 }
 
-// @title Todo Application
-// @description This is a todo list management application
-// @version 1.0
-// @host localhost:8395
-// @BasePath /api/users
 func (server Server) Init() {
 	e := echo.New()
 

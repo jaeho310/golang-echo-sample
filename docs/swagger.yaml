@@ -1,4 +1,110 @@
+basePath: /api
+definitions:
+  model.User:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+host: localhost:8395
 info:
   contact: {}
-paths: {}
+  title: Platform-sample Swagger API
+  version: 1.0.0
+paths:
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: Get all user's info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+      summary: Get all users
+    patch:
+      consumes:
+      - application/json
+      description: Get user's info
+      parameters:
+      - description: body of the user
+        in: body
+        name: name
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.User'
+      summary: Update user
+    post:
+      consumes:
+      - application/json
+      description: Create new user
+      parameters:
+      - description: body of the user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "203":
+          description: Non-Authoritative Information
+          schema:
+            $ref: '#/definitions/model.User'
+      summary: Create user
+  /users/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete user's info
+      parameters:
+      - description: id of the user
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/model.User'
+      summary: Delete user
+    get:
+      consumes:
+      - application/json
+      description: Get user's info
+      parameters:
+      - description: id of the user
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+      summary: Get user
 swagger: "2.0"
