@@ -1,6 +1,7 @@
 package service
 
 import (
+	"errors"
 	"platform-sample/model"
 	"platform-sample/repository"
 )
@@ -18,6 +19,18 @@ func (userServiceImpl *UserServiceImpl) GetUsers() ([]*model.User, error) {
 }
 
 func (userServiceImpl *UserServiceImpl) CreateUser(user *model.User) (*model.User, error) {
+
+	// TODO 1. 중복된 이름이 들어왔을때 svc단에서 처리
+	isduplicated, err := userServiceImpl.UserRepository.DuplicatedCheck(user.Name)
+	// 중복된경우
+	if isduplicated {
+		return nil, errors.New("중복된 유저입니다.")
+	} else if err != nil {
+		// 중복회원조회 DB에러
+		return nil, err
+	}
+
+	// TODO 2. 중복된 이름이 들어왔을때 repo단에서 처리
 	return userServiceImpl.UserRepository.Save(user)
 }
 

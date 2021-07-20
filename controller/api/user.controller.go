@@ -34,7 +34,7 @@ func (userController *UserController) CreateUser(c echo.Context) error {
 
 	createUser, err := userController.UserService.CreateUser(user)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, err)
+		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
 	return c.JSON(http.StatusCreated, createUser)
 }
@@ -65,7 +65,7 @@ func (userController *UserController) DeleteUser(c echo.Context) error {
 func (userController *UserController) GetUser(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, err)
+		return c.JSON(http.StatusBadRequest, err.Error())
 	}
 
 	user, err := userController.UserService.GetUser(id)

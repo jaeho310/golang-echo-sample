@@ -10,4 +10,5 @@ type UserRepository interface {
 	DeleteById(id int) error
 	Save(*model.User) (*model.User, error)
 	Update(*model.User) (*model.User, error)
+	DuplicatedCheck(name string) (bool, error)
 }

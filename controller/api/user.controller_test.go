@@ -34,9 +34,9 @@ func Test_IntegrateCreateUser(t *testing.T) {
 		log.Println(err)
 	}
 
-	//두개 뭔 차이지..?
-	//bytes.NewReader()
-	//bytes.NewBuffer()
+	// 두개 뭔 차이지..?
+	// bytes.NewReader()
+	// bytes.NewBuffer()
 	buff := bytes.NewBuffer(byteData)
 
 	e := echo.New()
