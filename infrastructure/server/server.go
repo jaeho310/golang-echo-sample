@@ -2,11 +2,13 @@ package server
 
 import (
 	"github.com/jinzhu/gorm"
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
+	echoSwagger "github.com/swaggo/echo-swagger"
 	"html/template"
 	"io"
 	"platform-sample/controller/api"
 	"platform-sample/controller/web"
+	_ "platform-sample/docs"
 	"platform-sample/infrastructure/database"
 	"platform-sample/service"
 )
@@ -33,6 +35,9 @@ func (server Server) Init() {
 	// api controller setting
 	userController := server.InjectUserController()
 	userController.Init(e.Group("/api/users"))
+
+	// swagger setting
+	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
 	e.Logger.Fatal(e.Start(":8395"))
 }
