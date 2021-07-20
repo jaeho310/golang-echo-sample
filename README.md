@@ -1,7 +1,20 @@
 # golang web sample
+## 사용법
+- go run main.go
+- 웹브라우저에서 localhost:8080접근 or postman, curl 등 rest client를 사용
+
+
 ## architecture
 - 3tier architecture(clean architecture)를 사용
-- 
+    - ddd에서 파생된 국내에서 가장 많이 쓰는 구조
+    - presentation layer, business layer, data access layer 로 나뉜다.
+- presentation 계층(interfaces/controller)
+  - 외부와 인터페이스 역할을 한다.
+- business 계층(service)
+  - 비즈니스 로직을 작성한다.
+- data access 계층(repository)
+  - 영속성 계층
+- infrastructure계층
 
 ## testing
 - 사용 라이브러리
@@ -20,8 +33,9 @@ $ mockery --all --keeptree
 ```
 - test code 작성법
 ```
-고랭 testing과 echo를 사용하면 통합테스트만 가능하다.
-mock(가짜)을 사용한 unit 테스트를 위해 mockery를 사용
+고랭 testing과 echo를 사용하면 통합테스트만 가능(영속성 계층을 갈아끼워서 테스트)
+mock(가짜)을 사용한 unit 테스트를 위해 mockery를 사용한다.
+각 계층간 interface역할을 하는 type ~~ interface의 mock을 mockery가 구현해준다. 
 ```
 
 

@@ -25,6 +25,7 @@ func (userController *UserController) Init(e *echo.Group) {
 	e.PATCH("", userController.UpdateUser)
 }
 
+// CreateUser is aaaa
 // @Summary Create user
 // @Description Create new user
 // @Accept json
@@ -46,6 +47,7 @@ func (userController *UserController) CreateUser(c echo.Context) error {
 	return c.JSON(http.StatusCreated, createUser)
 }
 
+// GetUsers is aaa
 // @Summary Get all users
 // @Description Get all user's info
 // @Accept json

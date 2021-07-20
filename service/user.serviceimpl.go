@@ -21,12 +21,12 @@ func (userServiceImpl *UserServiceImpl) GetUsers() ([]*model.User, error) {
 func (userServiceImpl *UserServiceImpl) CreateUser(user *model.User) (*model.User, error) {
 
 	// TODO 1. 중복된 이름이 들어왔을때 svc단에서 처리
-	isduplicated, err := userServiceImpl.UserRepository.DuplicatedCheck(user.Name)
+	isDuplicated, err := userServiceImpl.UserRepository.DuplicatedCheck(user.Name)
 	// 중복된경우
-	if isduplicated {
+	if isDuplicated {
 		return nil, errors.New("중복된 유저입니다.")
 	} else if err != nil {
-		// 중복회원조회 DB에러
+		// 중복회원조회할때 DB에러
 		return nil, err
 	}
 

@@ -9,7 +9,7 @@ import (
 	"platform-sample/controller/api"
 	"platform-sample/controller/web"
 	_ "platform-sample/docs"
-	"platform-sample/infrastructure/database"
+	"platform-sample/repository"
 	"platform-sample/service"
 )
 
@@ -64,8 +64,8 @@ func (server Server) InjectDb() *gorm.DB {
 	return server.MainDb
 }
 
-func (server Server) InjectUserRepository() *database.UserRepositoryImpl {
-	return database.UserRepositoryImpl{}.NewUserRepositoryImpl(server.InjectDb())
+func (server Server) InjectUserRepository() *repository.UserRepositoryImpl {
+	return repository.UserRepositoryImpl{}.NewUserRepositoryImpl(server.InjectDb())
 }
 
 func (server Server) InjectUserService() *service.UserServiceImpl {

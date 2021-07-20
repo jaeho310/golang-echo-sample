@@ -3,7 +3,7 @@ package api_test
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 	"log"
 	"net/http"
