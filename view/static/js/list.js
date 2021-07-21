@@ -16,24 +16,29 @@ function getUser() {
             // xhr.setRequestHeader(header, token);
         },
         success: function(data) {
-            let html = "";
-            let userBox = $("#userBox")
-            for (let i = 0; i < data.length; i++) {
-                html += '<tr>';
-                html += '<td>' + data[i].id + '</td>';
-                html += '<td><a id="detail_btn'+data[i].id+'" href="javascript:goToDetail('+data[i].id+')">' + data[i].name + '</a></td>';
-                html += '</tr>';
-                userList[data[i].id] = data[i];
+            if (data.success) {
+                let html = "";
+                let userBox = $("#userBox")
+                for (let i = 0; i < data.result.length; i++) {
+                    html += '<tr>';
+                    html += '<td>' + data.result[i].id + '</td>';
+                    html += '<td><a id="detail_btn'+data.result[i].id+'" href="javascript:goToDetail('+data.result[i].id+')">'
+                        + data.result[i].name + '</a></td>';
+                    html += '</tr>';
+                    userList[data.result[i].id] = data.result[i];
 
-                let option = document.createElement('option');
-                option.innerText = data[i].ID;
-                userBox.append(option);
+                    let option = document.createElement('option');
+                    option.innerText = data.result[i].ID;
+                    userBox.append(option);
+                }
+                $("#tableBody").empty();
+                $("#tableBody").append(html);
+            } else {
+                alert(" message = " + data.error)
             }
-            $("#tableBody").empty();
-            $("#tableBody").append(html);
         },
         error: function(request,status,error){
-            alert(" message = " + request.responseText);
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         }
     })
 }
@@ -57,7 +62,7 @@ $("#deleteBtn").on("click",function() {
             location.reload();
         },
         error: function(request,status,error){
-            alert(" message = " + request.responseText);
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         }
     })
 })
