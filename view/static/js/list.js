@@ -20,11 +20,10 @@ function getUser() {
             let userBox = $("#userBox")
             for (let i = 0; i < data.length; i++) {
                 html += '<tr>';
-                html += '<td>' + data[i].ID + '</td>';
-                // html += '<td><a id="detail_btn'+data[i].ID+'>' + data[i].name + '</a></td>';
-                html += '<td><a id="detail_btn'+data[i].ID+'" href="javascript:goToDetail('+data[i].ID+')">' + data[i].name + '</a></td>';
+                html += '<td>' + data[i].id + '</td>';
+                html += '<td><a id="detail_btn'+data[i].id+'" href="javascript:goToDetail('+data[i].id+')">' + data[i].name + '</a></td>';
                 html += '</tr>';
-                userList[data[i].ID] = data[i];
+                userList[data[i].id] = data[i];
 
                 let option = document.createElement('option');
                 option.innerText = data[i].ID;

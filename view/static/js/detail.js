@@ -15,10 +15,10 @@ function getUser(id) {
         },
         success: function(data) {
             user = data
-            $("#id").val(data.ID)
+            $("#id").val(data.id)
             $("#name").val(data.name)
-            $("#create").val(data.CreatedAt)
-            $("#update").val(data.UpdatedAt)
+            $("#create").val(data.createdAt)
+            $("#update").val(data.updatedAt)
         },
         error: function(request,status,error){
             alert(" message = " + request.responseText);
