@@ -11,6 +11,13 @@ $ go get github.com/swaggo/echo-swagger
 $ swag init
 ```
 
+- 참고 <br>
+orm library [gorm](https://gorm.io/index.html) 을 사용하게되면 gorm model을 찾지 못해서 ```$ swag init``` 을 사용시 
+```ParseComment error :cannot find type definition: gorm.Model```에러가 발생한다. <br>
+따라서 ```$ swag init``` 대신 <br>
+```$ swag init --parseDependency --parseInternal ```을 사용해준다.
+  
+  
 ## Code
 
 main.go
