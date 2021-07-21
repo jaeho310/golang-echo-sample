@@ -30,7 +30,10 @@ func (userRepositoryImpl *UserRepositoryImpl) FindById(id int) (*model.User, err
 
 }
 func (userRepositoryImpl *UserRepositoryImpl) DeleteById(id int) error {
-	userRepositoryImpl.db.Delete(&model.User{}, id)
+	err := userRepositoryImpl.db.Delete(&model.User{}, id).Error
+	if err != nil {
+		return err
+	}
 	return nil
 }
 func (userRepositoryImpl *UserRepositoryImpl) Save(user *model.User) (*model.User, error) {
