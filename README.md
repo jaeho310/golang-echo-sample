@@ -22,9 +22,9 @@
 통합테스트는 golang에 내장된 test 라이브러리를 사용한다.
 mockup 같은경우 두 진영이 존재한다.
 
-go get -u github.com/golang/mock/gomock
-                  vs
-go get github.com/stretchr/testify/mock
+github.com/golang/mock/gomock
+            vs
+github.com/stretchr/testify/mock
 
 start 수는 testify가 golang 기본 네임스페이스보다 많다(13.8k, 5.9k)
 
