@@ -37,13 +37,15 @@ func (userController *UserController) CreateUser(c echo.Context) error {
 	user := &model.User{}
 	bindErr := c.Bind(user)
 	if bindErr != nil {
+		c.Logger().Error(bindErr)
 		return c.JSON(http.StatusBadRequest, bindErr)
 	}
-
 	createUser, err := userController.UserService.CreateUser(user)
 	if err != nil {
+		c.Logger().Error(err)
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
+	c.Logger().Info(createUser)
 	return c.JSON(http.StatusCreated, createUser)
 }
 
@@ -57,9 +59,10 @@ func (userController *UserController) CreateUser(c echo.Context) error {
 func (userController *UserController) GetUsers(c echo.Context) error {
 	users, err := userController.UserService.GetUsers()
 	if err != nil {
+		c.Logger().Error(err)
 		return c.JSON(http.StatusInternalServerError, err)
 	}
-
+	c.Logger().Info(users)
 	return c.JSON(http.StatusOK, users)
 }
 
@@ -73,11 +76,13 @@ func (userController *UserController) GetUsers(c echo.Context) error {
 func (userController *UserController) DeleteUser(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
+		c.Logger().Error(err)
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
 	err = userController.UserService.DeleteUser(id)
 	if err != nil {
+		c.Logger().Error(err)
 		return c.JSON(http.StatusInternalServerError, err)
 	}
 
@@ -94,13 +99,16 @@ func (userController *UserController) DeleteUser(c echo.Context) error {
 func (userController *UserController) GetUser(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
+		c.Logger().Error(err)
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
 
 	user, err := userController.UserService.GetUser(id)
 	if err != nil {
+		c.Logger().Error(err)
 		return c.JSON(http.StatusInternalServerError, err)
 	}
+	c.Logger().Info(user)
 	return c.JSON(http.StatusOK, user)
 }
 
@@ -115,12 +123,15 @@ func (userController *UserController) UpdateUser(c echo.Context) error {
 	user := &model.User{}
 	bindErr := c.Bind(user)
 	if bindErr != nil {
+		c.Logger().Error(bindErr)
 		return c.JSON(http.StatusBadRequest, bindErr)
 	}
 
 	createUser, err := userController.UserService.UpdateUser(user)
 	if err != nil {
+		c.Logger().Error(bindErr)
 		return c.JSON(http.StatusInternalServerError, err)
 	}
+	c.Logger().Info(createUser)
 	return c.JSON(http.StatusCreated, createUser)
 }
