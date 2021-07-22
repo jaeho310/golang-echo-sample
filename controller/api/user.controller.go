@@ -139,7 +139,4 @@ func (userController *UserController) UpdateUser(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, createUser)
-	c.Logger().Info(createUser)
-	
-
 }
