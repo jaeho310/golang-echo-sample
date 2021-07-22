@@ -26,7 +26,7 @@ function getUser() {
                 userList[data[i].id] = data[i];
 
                 let option = document.createElement('option');
-                option.innerText = data[i].ID;
+                option.innerText = data[i].id;
                 userBox.append(option);
             }
             $("#tableBody").empty();
