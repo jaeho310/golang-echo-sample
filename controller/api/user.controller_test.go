@@ -3,6 +3,7 @@ package api_test
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 	"log"
@@ -24,9 +25,6 @@ func initIntegrateMockUserService() *service.UserServiceImpl {
 	return mockServer.InjectUserService()
 }
 
-func initUnitMockUserService() {
-}
-
 func Test_IntegrateCreateUser(t *testing.T) {
 	mockUser := model.User{Name: "James"}
 	byteData, err := json.Marshal(mockUser)
@@ -34,11 +32,8 @@ func Test_IntegrateCreateUser(t *testing.T) {
 		log.Println(err)
 	}
 
-	// 두개 뭔 차이지..?
-	// bytes.NewReader()
-	// bytes.NewBuffer()
 	buff := bytes.NewBuffer(byteData)
-
+	fmt.Println(buff)
 	e := echo.New()
 
 	req := httptest.NewRequest(http.MethodPost, "/api/users", buff)
