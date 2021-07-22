@@ -30,12 +30,14 @@ func (userController *UserController) Init(e *echo.Group) {
 // @Description Create new user
 // @Accept json
 // @Produce json
-// @Param user body model.User true "body of the user"
-// @Success 203 {object} model.User
+// @Param user body UserDto true "body of the user"
+// @Success 201 {object} model.User
 // @Router /users [post]
 func (userController *UserController) CreateUser(c echo.Context) error {
-	user := &model.User{}
-	bindErr := c.Bind(user)
+	userDto := &UserDto{}
+	bindErr := c.Bind(userDto)
+	user := userDto.toModel()
+
 	if bindErr != nil {
 		c.Logger().Error(bindErr)
 		return c.JSON(http.StatusBadRequest, bindErr)
@@ -66,6 +68,7 @@ func (userController *UserController) GetUsers(c echo.Context) error {
 	return c.JSON(http.StatusOK, users)
 }
 
+// DeleteUser aaa
 // @Summary Delete user
 // @Description Delete user's info
 // @Accept json
@@ -89,6 +92,7 @@ func (userController *UserController) DeleteUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, nil)
 }
 
+// GetUser aaa
 // @Summary Get user
 // @Description Get user's info
 // @Accept json
@@ -112,12 +116,13 @@ func (userController *UserController) GetUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, user)
 }
 
+// UpdateUser aaa
 // @Summary Update user
 // @Description Get user's info
 // @Accept json
 // @Produce json
 // @Param name body model.User true "body of the user"
-// @Success 201 {object} model.User
+// @Success 200 {object} model.User
 // @Router /users [patch]
 func (userController *UserController) UpdateUser(c echo.Context) error {
 	user := &model.User{}
@@ -132,6 +137,9 @@ func (userController *UserController) UpdateUser(c echo.Context) error {
 		c.Logger().Error(bindErr)
 		return c.JSON(http.StatusInternalServerError, err)
 	}
+
+	return c.JSON(http.StatusOK, createUser)
 	c.Logger().Info(createUser)
-	return c.JSON(http.StatusCreated, createUser)
+	
+
 }
