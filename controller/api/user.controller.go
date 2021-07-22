@@ -40,15 +40,15 @@ func (userController *UserController) CreateUser(c echo.Context) error {
 
 	if bindErr != nil {
 		c.Logger().Error(bindErr)
-		return c.JSON(http.StatusBadRequest, bindErr)
+		return ReturnApiFail(c, http.StatusBadRequest, ApiParameterError, bindErr)
 	}
 	createUser, err := userController.UserService.CreateUser(user)
 	if err != nil {
 		c.Logger().Error(err)
-		return c.JSON(http.StatusInternalServerError, err.Error())
+		return ReturnApiFail(c, http.StatusInternalServerError, ApiQueryError, err)
 	}
 	c.Logger().Info(createUser)
-	return c.JSON(http.StatusCreated, createUser)
+	return ReturnApiSuccess(c, http.StatusCreated, createUser)
 }
 
 // GetUsers is aaa
@@ -62,10 +62,10 @@ func (userController *UserController) GetUsers(c echo.Context) error {
 	users, err := userController.UserService.GetUsers()
 	if err != nil {
 		c.Logger().Error(err)
-		return c.JSON(http.StatusInternalServerError, err)
+		return ReturnApiFail(c, http.StatusInternalServerError, ApiQueryError, err)
 	}
 	c.Logger().Info(users)
-	return c.JSON(http.StatusOK, users)
+	return ReturnApiSuccess(c, http.StatusOK, users)
 }
 
 // DeleteUser aaa
@@ -80,16 +80,15 @@ func (userController *UserController) DeleteUser(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		c.Logger().Error(err)
-		return c.JSON(http.StatusBadRequest, err)
+		return ReturnApiFail(c, http.StatusBadRequest, ApiParameterError, err)
 	}
 
 	err = userController.UserService.DeleteUser(id)
 	if err != nil {
 		c.Logger().Error(err)
-		return c.JSON(http.StatusInternalServerError, err)
+		return ReturnApiFail(c, http.StatusInternalServerError, ApiQueryError, err)
 	}
-
-	return c.JSON(http.StatusOK, nil)
+	return ReturnApiSuccess(c, http.StatusNoContent, nil)
 }
 
 // GetUser aaa
@@ -104,16 +103,16 @@ func (userController *UserController) GetUser(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		c.Logger().Error(err)
-		return c.JSON(http.StatusBadRequest, err.Error())
+		return ReturnApiFail(c, http.StatusBadRequest, ApiParameterError, err)
 	}
 
 	user, err := userController.UserService.GetUser(id)
 	if err != nil {
 		c.Logger().Error(err)
-		return c.JSON(http.StatusInternalServerError, err)
+		return ReturnApiFail(c, http.StatusInternalServerError, ApiQueryError, err)
 	}
 	c.Logger().Info(user)
-	return c.JSON(http.StatusOK, user)
+	return ReturnApiSuccess(c, http.StatusOK, user)
 }
 
 // UpdateUser aaa
@@ -122,21 +121,21 @@ func (userController *UserController) GetUser(c echo.Context) error {
 // @Accept json
 // @Produce json
 // @Param name body model.User true "body of the user"
-// @Success 200 {object} model.User
+// @Success 201 {object} model.User
 // @Router /users [patch]
 func (userController *UserController) UpdateUser(c echo.Context) error {
 	user := &model.User{}
 	bindErr := c.Bind(user)
 	if bindErr != nil {
 		c.Logger().Error(bindErr)
-		return c.JSON(http.StatusBadRequest, bindErr)
+		return ReturnApiFail(c, http.StatusBadRequest, ApiParameterError, bindErr)
 	}
 
 	createUser, err := userController.UserService.UpdateUser(user)
 	if err != nil {
 		c.Logger().Error(bindErr)
-		return c.JSON(http.StatusInternalServerError, err)
+		return ReturnApiFail(c, http.StatusInternalServerError, ApiQueryError, err)
 	}
-
-	return c.JSON(http.StatusOK, createUser)
+	c.Logger().Info(createUser)
+	return ReturnApiSuccess(c, http.StatusOK, user)
 }

@@ -1,9 +1,8 @@
-package common
+package api
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
+	"github.com/labstack/echo/v4"
 )
 
 type ApiResult struct {
@@ -28,9 +27,8 @@ var (
 	ApiQueryError     = ApiError{Code: 602, Message: "failed to query"}
 )
 
-func ReturnApiFail(w http.ResponseWriter, httpStatus int, apiError ApiError, err error, v ...interface{}) {
-	w.WriteHeader(httpStatus)
-	json.NewEncoder(w).Encode(ApiResult{
+func ReturnApiFail(c echo.Context, httpStatus int, apiError ApiError, err error, v ...interface{}) error {
+	return c.JSON(httpStatus, ApiResult{
 		Success: false,
 		Error: ApiError{
 			Code:    apiError.Code,
@@ -40,10 +38,8 @@ func ReturnApiFail(w http.ResponseWriter, httpStatus int, apiError ApiError, err
 	})
 }
 
-func ReturnApiSuccess(w http.ResponseWriter, httpStatus int, result interface{}) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(httpStatus)
-	json.NewEncoder(w).Encode(ApiResult{
+func ReturnApiSuccess(c echo.Context, status int, result interface{}) error {
+	return c.JSON(status, ApiResult{
 		Success: true,
 		Result:  result,
 	})

@@ -14,14 +14,14 @@ function getUser(id) {
             // xhr.setRequestHeader(header, token);
         },
         success: function(data) {
-            user = data
-            $("#id").val(data.id)
-            $("#name").val(data.name)
-            $("#create").val(data.createdAt)
-            $("#update").val(data.updatedAt)
+            user = data.result
+            $("#id").val(data.result.id)
+            $("#name").val(data.result.name)
+            $("#create").val(data.result.createdAt)
+            $("#update").val(data.result.updatedAt)
         },
         error: function(request,status,error){
-            alert(" message = " + request.responseText);
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         }
     })
 }
@@ -44,7 +44,7 @@ $("#delete_btn").on("click", function() {
             window.location.href="/list"
         },
         error: function(request,status,error){
-            alert(" message = " + request.responseText);
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         }
     })
 });
@@ -78,7 +78,7 @@ $("#update_btn").on("click", function() {
             window.location.reload(true)
         },
         error: function(request,status,error){
-            alert(" message = " + request.responseText);
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         }
     })
 });

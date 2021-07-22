@@ -26,7 +26,7 @@ $("#reg_btn").on("click", function() {
             $("#userName").val("");
         },
         error: function(request,status,error){
-            alert(" message = " + request.responseText);
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         }
     })
 
