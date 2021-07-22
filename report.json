@@ -1,0 +1,26 @@
+{"Time":"2021-07-19T17:31:14.0798674+09:00","Action":"output","Package":"platform-sample","Output":"?   \tplatform-sample\t[no test files]\n"}
+{"Time":"2021-07-19T17:31:14.2283627+09:00","Action":"skip","Package":"platform-sample","Elapsed":0.148}
+{"Time":"2021-07-19T17:31:14.7720616+09:00","Action":"run","Package":"platform-sample/service","Test":"TestGetUser"}
+{"Time":"2021-07-19T17:31:14.7720616+09:00","Action":"output","Package":"platform-sample/service","Test":"TestGetUser","Output":"=== RUN   TestGetUser\n"}
+{"Time":"2021-07-19T17:31:14.7720616+09:00","Action":"output","Package":"platform-sample/service","Test":"TestGetUser","Output":"--- PASS: TestGetUser (0.00s)\n"}
+{"Time":"2021-07-19T17:31:14.772594+09:00","Action":"pass","Package":"platform-sample/service","Test":"TestGetUser","Elapsed":0}
+{"Time":"2021-07-19T17:31:14.772594+09:00","Action":"output","Package":"platform-sample/service","Output":"PASS\n"}
+{"Time":"2021-07-19T17:31:14.7944403+09:00","Action":"output","Package":"platform-sample/service","Output":"ok  \tplatform-sample/service\t0.518s\n"}
+{"Time":"2021-07-19T17:31:14.8073762+09:00","Action":"pass","Package":"platform-sample/service","Elapsed":0.531}
+{"Time":"2021-07-19T17:31:16.11909+09:00","Action":"output","Package":"platform-sample/controller/api","Output":"fork/exec C:\\Users\\a\\AppData\\Local\\Temp\\go-build2124060754\\b151\\api.test.exe: Access is denied.\n"}
+{"Time":"2021-07-19T17:31:16.11909+09:00","Action":"output","Package":"platform-sample/controller/api","Output":"FAIL\tplatform-sample/controller/api\t0.453s\n"}
+{"Time":"2021-07-19T17:31:16.11909+09:00","Action":"fail","Package":"platform-sample/controller/api","Elapsed":0.454}
+{"Time":"2021-07-19T17:31:16.1220859+09:00","Action":"output","Package":"platform-sample/controller/web","Output":"?   \tplatform-sample/controller/web\t[no test files]\n"}
+{"Time":"2021-07-19T17:31:16.1220859+09:00","Action":"skip","Package":"platform-sample/controller/web","Elapsed":0}
+{"Time":"2021-07-19T17:31:16.1220859+09:00","Action":"output","Package":"platform-sample/infrastructure/database","Output":"?   \tplatform-sample/infrastructure/database\t[no test files]\n"}
+{"Time":"2021-07-19T17:31:16.1220859+09:00","Action":"skip","Package":"platform-sample/infrastructure/database","Elapsed":0}
+{"Time":"2021-07-19T17:31:16.1220859+09:00","Action":"output","Package":"platform-sample/infrastructure/server","Output":"?   \tplatform-sample/infrastructure/server\t[no test files]\n"}
+{"Time":"2021-07-19T17:31:16.1220859+09:00","Action":"skip","Package":"platform-sample/infrastructure/server","Elapsed":0}
+{"Time":"2021-07-19T17:31:16.1220859+09:00","Action":"output","Package":"platform-sample/mocks/repository","Output":"?   \tplatform-sample/mocks/repository\t[no test files]\n"}
+{"Time":"2021-07-19T17:31:16.1220859+09:00","Action":"skip","Package":"platform-sample/mocks/repository","Elapsed":0}
+{"Time":"2021-07-19T17:31:16.1220859+09:00","Action":"output","Package":"platform-sample/mocks/service","Output":"?   \tplatform-sample/mocks/service\t[no test files]\n"}
+{"Time":"2021-07-19T17:31:16.1220859+09:00","Action":"skip","Package":"platform-sample/mocks/service","Elapsed":0}
+{"Time":"2021-07-19T17:31:16.1220859+09:00","Action":"output","Package":"platform-sample/model","Output":"?   \tplatform-sample/model\t[no test files]\n"}
+{"Time":"2021-07-19T17:31:16.1220859+09:00","Action":"skip","Package":"platform-sample/model","Elapsed":0}
+{"Time":"2021-07-19T17:31:16.1220859+09:00","Action":"output","Package":"platform-sample/repository","Output":"?   \tplatform-sample/repository\t[no test files]\n"}
+{"Time":"2021-07-19T17:31:16.1220859+09:00","Action":"skip","Package":"platform-sample/repository","Elapsed":0}
