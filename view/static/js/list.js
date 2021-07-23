@@ -18,7 +18,6 @@ function getUser() {
         success: function(data) {
             if (data.success) {
                 let html = "";
-                let userBox = $("#userBox")
                 for (let i = 0; i < data.result.length; i++) {
                     html += '<tr>';
                     html += '<td>' + data.result[i].id + '</td>';
@@ -27,9 +26,6 @@ function getUser() {
                     html += '</tr>';
                     userList[data.result[i].id] = data.result[i];
 
-                    let option = document.createElement('option');
-                    option.innerText = data.result[i].ID;
-                    userBox.append(option);
                 }
                 $("#tableBody").empty();
                 $("#tableBody").append(html);

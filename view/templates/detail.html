@@ -27,39 +27,45 @@
         </a>
         <a class="py-2 d-none d-md-inline-block" href="/">회원등록</a>
         <a class="py-2 d-none d-md-inline-block" href="/list">회원목록</a>
+        <a class="py-2 d-none d-md-inline-block" href="/card">카드등록</a>
       </nav>
     </header>
 
    <div class="container" style="margin-top: 40px;">
-        <h2>상세 정보</h2>
+       <div class="fs-2 mb-3">
+           <svg xmlns="http://www.w3.org/2000/svg" width="35" height="37" fill="currentColor" class="bi bi-file-earmark-person" viewBox="6 0 6 20">
+               <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+               <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5v2z"/>
+           </svg>
+           상세정보
+       </div>
 
-            <div class="mb-3">
-              <label for="id" class="form-label">번호</label>
-              <input type="text" class="form-control" id="id" readonly="readonly">
-            </div>
+        <div class="mb-3">
+          <label for="id" class="form-label">번호</label>
+          <input type="text" class="form-control" id="id" readonly="readonly">
+        </div>
 
-            <div class="mb-3">
-              <label for="name" class="form-label">이름</label>
-              <input type="text" class="form-control" id="name">
-            </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">이름</label>
+          <input type="text" class="form-control" id="name">
+        </div>
 
-            <div class="mb-3">
-                <label for="create" class="form-label">가입일</label>
-                <input type="text" class="form-control" id="create" readonly="readonly">
-            </div>            
+        <div class="mb-3">
+            <label for="create" class="form-label">가입일</label>
+            <input type="text" class="form-control" id="create" readonly="readonly">
+        </div>
 
-            <div class="mb-3">
-                <label for="update" class="form-label">변경일</label>
-                <input type="text" class="form-control" id="update" readonly="readonly">
-            </div>
+        <div class="mb-3">
+            <label for="update" class="form-label">변경일</label>
+            <input type="text" class="form-control" id="update" readonly="readonly">
+        </div>
 
-            <div class="text-end">
-              <button id="update_btn" class="btn btn-primary">변경</button>
-              <button id="delete_btn" class="btn btn-primary">삭제</button>
-              <button id="cancel_btn" class="btn btn-primary">목록</button>
-            </div>
-            <p id="template_id" style="display: none">{{index . "id"}}</p>
-          </form>
+        <div class="text-end">
+          <button id="update_btn" class="btn btn-primary">변경</button>
+          <button id="delete_btn" class="btn btn-primary">삭제</button>
+          <button id="cancel_btn" class="btn btn-primary">목록</button>
+        </div>
+        <p id="template_id" style="display: none">{{index . "id"}}</p>
     </div>
 
 
