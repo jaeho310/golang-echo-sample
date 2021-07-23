@@ -43,15 +43,27 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.User"
+                            "$ref": "#/definitions/api.UserDto"
                         }
                     }
                 ],
                 "responses": {
-                    "203": {
-                        "description": "Non-Authoritative Information",
+                    "201": {
+                        "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/model.User"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/api.ApiResult"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "result": {
+                                            "$ref": "#/definitions/model.User"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -144,6 +156,42 @@
         }
     },
     "definitions": {
+        "api.ApiError": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "details": {
+                    "type": "object"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.ApiResult": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/api.ApiError"
+                },
+                "result": {
+                    "type": "object"
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "api.UserDto": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
         "model.User": {
             "type": "object",
             "properties": {

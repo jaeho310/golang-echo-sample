@@ -1,5 +1,28 @@
 basePath: /api
 definitions:
+  api.ApiError:
+    properties:
+      code:
+        type: integer
+      details:
+        type: object
+      message:
+        type: string
+    type: object
+  api.ApiResult:
+    properties:
+      error:
+        $ref: '#/definitions/api.ApiError'
+      result:
+        type: object
+      success:
+        type: boolean
+    type: object
+  api.UserDto:
+    properties:
+      name:
+        type: string
+    type: object
   model.User:
     properties:
       createdAt:
@@ -61,14 +84,19 @@ paths:
         name: user
         required: true
         schema:
-          $ref: '#/definitions/model.User'
+          $ref: '#/definitions/api.UserDto'
       produces:
       - application/json
       responses:
-        "203":
-          description: Non-Authoritative Information
+        "201":
+          description: Created
           schema:
-            $ref: '#/definitions/model.User'
+            allOf:
+            - $ref: '#/definitions/api.ApiResult'
+            - properties:
+                result:
+                  $ref: '#/definitions/model.User'
+              type: object
       summary: Create user
   /users/{id}:
     delete:

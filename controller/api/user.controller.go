@@ -31,7 +31,7 @@ func (userController *UserController) Init(e *echo.Group) {
 // @Accept json
 // @Produce json
 // @Param user body UserDto true "body of the user"
-// @Success 201 {object} model.User
+// @Success 201 {object} ApiResult{result=model.User}
 // @Router /users [post]
 func (userController *UserController) CreateUser(c echo.Context) error {
 	userDto := &UserDto{}
