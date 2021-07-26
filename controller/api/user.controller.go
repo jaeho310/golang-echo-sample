@@ -25,13 +25,14 @@ func (userController *UserController) Init(e *echo.Group) {
 	e.PATCH("", userController.UpdateUser)
 }
 
-// CreateUser is aaaa
+// CreateUser is create new user
 // @Summary Create user
-// @Description Create new user
+// @Description Create new user passing name parameter
 // @Accept json
 // @Produce json
 // @Param user body UserDto true "body of the user"
 // @Success 201 {object} ApiResult{result=model.User}
+// @Failure 500 {object} ApiResult{result=model.User} "Internal Server Error"
 // @Router /users [post]
 func (userController *UserController) CreateUser(c echo.Context) error {
 	userDto := &UserDto{}
@@ -51,12 +52,12 @@ func (userController *UserController) CreateUser(c echo.Context) error {
 	return ReturnApiSuccess(c, http.StatusCreated, createUser)
 }
 
-// GetUsers is aaa
+// GetUsers get all users' list
 // @Summary Get all users
 // @Description Get all user's info
 // @Accept json
 // @Produce json
-// @Success 200 {object} model.User
+// @Success 200 {object} ApiResult{result=model.User}
 // @Router /users [get]
 func (userController *UserController) GetUsers(c echo.Context) error {
 	users, err := userController.UserService.GetUsers()
@@ -68,13 +69,13 @@ func (userController *UserController) GetUsers(c echo.Context) error {
 	return ReturnApiSuccess(c, http.StatusOK, users)
 }
 
-// DeleteUser aaa
+// DeleteUser delete specific user's info
 // @Summary Delete user
-// @Description Delete user's info
+// @Description Delete existing user's info passing id parameter
 // @Accept json
 // @Produce json
 // @Param id path string true "id of the user"
-// @Success 204 {object} model.User
+// @Success 204 {object} ApiResult{result=model.User}
 // @Router /users/{id} [delete]
 func (userController *UserController) DeleteUser(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
@@ -91,13 +92,14 @@ func (userController *UserController) DeleteUser(c echo.Context) error {
 	return ReturnApiSuccess(c, http.StatusNoContent, nil)
 }
 
-// GetUser aaa
+// GetUser get user's info using id
 // @Summary Get user
-// @Description Get user's info
+// @Description Get user's info passing id parameter
 // @Accept json
 // @Produce json
 // @Param id path string true "id of the user"
-// @Success 200 {object} model.User
+// @Success 200 {object} ApiResult{result=model.User}
+// @Failure 500 {object} ApiResult{result=model.User} "Internal Server Error"
 // @Router /users/{id} [get]
 func (userController *UserController) GetUser(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
@@ -115,13 +117,13 @@ func (userController *UserController) GetUser(c echo.Context) error {
 	return ReturnApiSuccess(c, http.StatusOK, user)
 }
 
-// UpdateUser aaa
+// UpdateUser updates existing user's info
 // @Summary Update user
-// @Description Get user's info
+// @Description Update existing user's information
 // @Accept json
 // @Produce json
 // @Param name body model.User true "body of the user"
-// @Success 201 {object} model.User
+// @Success 201 {object} ApiResult{result=model.User}
 // @Router /users [patch]
 func (userController *UserController) UpdateUser(c echo.Context) error {
 	user := &model.User{}
