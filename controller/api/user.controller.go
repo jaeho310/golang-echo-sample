@@ -3,6 +3,7 @@ package api
 import (
 	"github.com/labstack/echo/v4"
 	"net/http"
+	"platform-sample/controller/dto"
 	_ "platform-sample/docs"
 	"platform-sample/model"
 	"platform-sample/service"
@@ -35,11 +36,12 @@ func (userController *UserController) Init(e *echo.Group) {
 // @Failure 500 {object} ApiResult{result=model.User} "Internal Server Error"
 // @Router /users [post]
 func (userController *UserController) CreateUser(c echo.Context) error {
-	userDto := &UserDto{}
+	userDto := &dto.UserDto{}
 	bindErr := c.Bind(userDto)
-	user := userDto.toModel()
+	user := userDto.ToModel()
 
 	if bindErr != nil {
+
 		c.Logger().Error(bindErr)
 		return ReturnApiFail(c, http.StatusBadRequest, ApiParameterError, bindErr)
 	}

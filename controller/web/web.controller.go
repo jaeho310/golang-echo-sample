@@ -10,7 +10,7 @@ type WebController struct {
 
 func (webController WebController) Init(e *echo.Echo) {
 	e.GET("/", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "main.html", nil)
+		return c.Render(http.StatusOK, "list.html", nil)
 	})
 	e.GET("/list", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "list.html", nil)
@@ -20,5 +20,12 @@ func (webController WebController) Init(e *echo.Echo) {
 	})
 	e.GET("/card", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "card.html", nil)
+	})
+	e.GET("/user", func(c echo.Context) error {
+		return c.Render(http.StatusOK, "user.html", nil)
+	})
+
+	e.GET("/delete", func(c echo.Context) error {
+		return c.Render(http.StatusOK, "delete.html", nil)
 	})
 }

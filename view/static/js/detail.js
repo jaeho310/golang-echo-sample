@@ -15,10 +15,16 @@ function getUser(id) {
         },
         success: function(data) {
             user = data.result
-            $("#id").val(data.result.id)
-            $("#name").val(data.result.name)
-            $("#create").val(data.result.createdAt)
-            $("#update").val(data.result.updatedAt)
+            $("#id").val(data.result.id);
+            $("#name").val(data.result.name);
+            $("#create").val(data.result.createdAt);
+            $("#update").val(data.result.updatedAt);
+            let cardList = []
+            for (let i = 0; i < data.result.cards.length; i++) {
+                cardData = data.result.cards[i].name + "(" + data.result.cards[i].limit + ")"
+                cardList.push(cardData)
+            }
+            $("#card").val(cardList.join(", "))
         },
         error: function(request,status,error){
             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

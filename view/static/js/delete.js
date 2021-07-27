@@ -32,32 +32,65 @@ function getUsers() {
     })
 }
 
+function reloadCardBox() {
+    let cardBox = $("#cardBox")
+    cardBox.find("option").remove();
+    let option = document.createElement('option');
+    option.innerText = "삭제할 카드를 선택해주세요"
+    cardBox.append(option);
+}
+
+$("#userBox").change(function (){
+    reloadCardBox();
+    let userName = $("#userBox").val();
+    if (userName == "사용자를 선택해주세요") {
+        alert("사용자를 선택해주세요")
+        return;
+    }
+    fillCardBox(userName);
+})
+
+function fillCardBox(userName) {
+    let cardBox = $("#cardBox")
+    let cards = userList[userName].cards;
+    for (let i = 0; i < cards.length; i++) {
+        let option = document.createElement('option');
+        option.innerText = cards[i].name;
+        cardBox.append(option);
+    }
+}
+
 $("#cancelBtn").on("click", function() {
     window.location.href="/list"
 });
 
-$("#regBtn").on("click", function() {
-    let cardName = $("#cardName").val();
-    let cardLimit = $("#cardLimit").val();
-    let userName = $("#userBox").val()
-    isValidate = validationCheck(cardName, cardLimit)
-    if (!isValidate) {
-        return
+function getCardId(cardName) {
+    let cards = userList[$("#userBox").val()].cards;
+    for (let i = 0; i < cards.length; i++) {
+        if (cardName == cards[i].name) {
+            return cards[i].id
+        }
     }
-    let data = new Object()
-    data["name"] = cardName
-    data["limit"] = Number(cardLimit)
-    data["userId"] = userList[userName].id
+
+}
+
+$("#deleteBtn").on("click", function() {
+    let userId = userList[$("#userBox").val()].id;
+    let cardName = $("#cardBox").val();
+    if (cardName == "삭제할 카드를 선택해주세요") {
+        alert("삭제할 카드를 선택해주세요")
+        return;
+    }
+    let cardId = getCardId(cardName);
     $.ajax({
-        url: '/api/cards',
+        url: '/api/cards?cardId=' + cardId + "&userId=" +userId,
         contentType: 'application/json',
-        type: 'post',
-        data: JSON.stringify(data),
+        type: 'delete',
         beforeSend: function(xhr) {
             // xhr.setRequestHeader(header, token);
         },
         success: function(data) {
-            alert("등록성공")
+            alert("삭제성공")
             window.location.href="/list"
         },
         error: function(request,status,error){
@@ -65,15 +98,3 @@ $("#regBtn").on("click", function() {
         }
     })
 });
-
-function validationCheck(cardName, cardLimit) {
-    if (!cardName || !cardLimit) {
-        alert("빈칸을 모두 입력해주세요")
-        return false
-    }
-    if (isNaN(cardLimit)) {
-        alert("한도에는 숫자만 입력해주세요")
-        return false
-    }
-    return true
-}

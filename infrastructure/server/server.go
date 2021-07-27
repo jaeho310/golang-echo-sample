@@ -23,7 +23,6 @@ type TemplateRenderer struct {
 
 func (server Server) Init() {
 	e := echo.New()
-
 	// web controller setting
 	renderer := &TemplateRenderer{
 		templates: template.Must(template.ParseGlob("view/templates/*.html")),
@@ -33,6 +32,9 @@ func (server Server) Init() {
 	web.WebController{}.Init(e)
 
 	// api controller setting
+	cardController := server.InjectCardController()
+	cardController.Init(e.Group("/api/cards"))
+
 	userController := server.InjectUserController()
 	userController.Init(e.Group("/api/users"))
 
@@ -64,8 +66,14 @@ func (server Server) InjectDb() *gorm.DB {
 	return server.MainDb
 }
 
-func (server Server) InjectUserRepository() *repository.UserRepositoryImpl {
-	return repository.UserRepositoryImpl{}.NewUserRepositoryImpl(server.InjectDb())
+func (server Server) InjectUserRepository() (*repository.UserRepositoryImpl, *repository.CardRepositoryImpl) {
+	return repository.UserRepositoryImpl{}.NewUserRepositoryImpl(server.InjectDb()),
+		repository.CardRepositoryImpl{}.NewCardRepositoryImpl(server.InjectDb())
+	// TODO 이거 같은객체가 아니다. 동시성 및 멤버에 문제가 생길가능성 존재하여 위험하다.
+	// 방법 1. db 쿼리문을 재사용하지않고 매번 사용한다. -> 위험하고 db단의 트랜잭션 처리를 애플리케이션단에서 잡아줘야한다.
+	// 방법 2. 의존성 주입을 해줄 객체를 sington이나 static 객체로 한곳에서 관리한다. -> 주입부분을 갈아끼워야한다.
+	// echo를 깊게 공부하지않아서 정확하지는 않지만, 하나의 transactin은 같은객체라면 echo가 잡아놔서 동시성을 처리해줄텐데
+	// 어떤방법이 좋을지 모르겠다.
 }
 
 func (server Server) InjectUserService() *service.UserServiceImpl {
@@ -74,4 +82,16 @@ func (server Server) InjectUserService() *service.UserServiceImpl {
 
 func (server Server) InjectUserController() *api.UserController {
 	return api.UserController{}.NewUserController(server.InjectUserService())
+}
+
+func (server Server) InjectCardRepository() *repository.CardRepositoryImpl {
+	return repository.CardRepositoryImpl{}.NewCardRepositoryImpl(server.InjectDb())
+}
+
+func (server Server) InjectCardService() *service.CardServiceImpl {
+	return service.CardServiceImpl{}.NewCardServiceImpl(server.InjectCardRepository())
+}
+
+func (server Server) InjectCardController() *api.CardController {
+	return api.CardController{}.NewCardController(server.InjectCardService())
 }

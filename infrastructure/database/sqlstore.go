@@ -41,4 +41,5 @@ func (SqlStore) GetMockDb() *gorm.DB {
 
 func migrate(db *gorm.DB) {
 	db.AutoMigrate(&model.User{})
+	db.AutoMigrate(&model.Card{})
 }

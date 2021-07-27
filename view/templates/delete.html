@@ -34,11 +34,11 @@
 
 <div class="container" style="margin-top: 40px;">
     <div class="fs-2 mb-3">
-        <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 15 20">
-            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
-            <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="37" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 18">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
         </svg>
-        카드등록
+        카드삭제
     </div>
     <div class="mb-3">
         <label for="userBox" class="form-label">회원 선택</label>
@@ -48,21 +48,18 @@
     </div>
 
     <div class="mb-3">
-        <label for="cardName" class="form-label">카드명</label>
-        <input type="text" class="form-control" id="cardName">
-    </div>
-
-    <div class="mb-3">
-        <label for="cardLimit" class="form-label">한도</label>
-        <input type="text" class="form-control" id="cardLimit">
+        <label for="cardBox" class="form-label">카드 선택</label>
+        <select class="form-select" aria-label="Default select example" id="cardBox">
+            <option selected>삭제할 카드를 선택해주세요</option>
+        </select>
     </div>
 
     <div class="text-end">
-        <button id="regBtn" class="btn btn-primary">등록</button>
+        <button id="deleteBtn" class="btn btn-primary">삭제</button>
         <button id="cancelBtn" class="btn btn-primary">목록</button>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="/static/js/card.js"></script>
+<script src="/static/js/delete.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 let fileList = new Object();
 
 $(document).ready(function(){
-    console.log("main ready");
+    console.log("user ready");
 
 });
 

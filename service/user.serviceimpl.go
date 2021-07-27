@@ -1,17 +1,18 @@
 package service
 
 import (
-	"errors"
 	"platform-sample/model"
 	"platform-sample/repository"
 )
 
 type UserServiceImpl struct {
 	repository.UserRepository
+	repository.CardRepository
 }
 
-func (UserServiceImpl) NewUserServiceImpl(repository repository.UserRepository) *UserServiceImpl {
-	return &UserServiceImpl{repository}
+func (UserServiceImpl) NewUserServiceImpl(userRepository repository.UserRepository,
+	cardRepository repository.CardRepository) *UserServiceImpl {
+	return &UserServiceImpl{userRepository, cardRepository}
 }
 
 func (userServiceImpl *UserServiceImpl) GetUsers() ([]*model.User, error) {
@@ -19,23 +20,20 @@ func (userServiceImpl *UserServiceImpl) GetUsers() ([]*model.User, error) {
 }
 
 func (userServiceImpl *UserServiceImpl) CreateUser(user *model.User) (*model.User, error) {
-
-	// TODO 1. 중복된 이름이 들어왔을때 svc단에서 처리
-	isDuplicated, err := userServiceImpl.UserRepository.DuplicatedCheck(user.Name)
-	// 중복된경우
-	if isDuplicated {
-		return nil, errors.New("중복된 유저입니다.")
-	} else if err != nil {
-		// 중복회원조회할때 DB에러
-		return nil, err
-	}
-
-	// TODO 2. 중복된 이름이 들어왔을때 repo단에서 처리
 	return userServiceImpl.UserRepository.Save(user)
 }
 
 func (userServiceImpl *UserServiceImpl) DeleteUser(id int) error {
-	return userServiceImpl.UserRepository.DeleteById(id)
+	err := userServiceImpl.UserRepository.DeleteById(id)
+	if err != nil {
+		return err
+	}
+	//err = userServiceImpl.CardRepository.DeleteByUserId(id)
+	//if err != nil {
+	//	return err
+	//}
+
+	return nil
 }
 
 func (userServiceImpl *UserServiceImpl) GetUser(id int) (*model.User, error) {

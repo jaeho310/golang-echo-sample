@@ -20,6 +20,5 @@ func init() {
 func main() {
 	db := database.SqlStore{}.GetDb()
 	defer db.Close()
-
 	server.Server{MainDb: db}.Init()
 }
