@@ -8,5 +8,4 @@ import (
 type CardRepository interface {
 	Save(*dto.CardDto) (*model.Card, error)
 	DeleteById(int, int) error
-	DeleteByUserId(int) error
 }

@@ -21,7 +21,6 @@ func (SqlStore) GetDb() *gorm.DB {
 	}
 
 	migrate(db)
-
 	return db
 }
 

@@ -42,11 +42,3 @@ func (cardRepositoryImpl *CardRepositoryImpl) DeleteById(cardId int, userId int)
 	}
 	return nil
 }
-
-func (cardRepositoryImpl CardRepositoryImpl) DeleteByUserId(userId int) error {
-	err := cardRepositoryImpl.db.Where("user_id = ?", userId).Delete(&model.Card{}).Error
-	if err != nil {
-		return err
-	}
-	return nil
-}

@@ -45,17 +45,24 @@ func (userRepositoryImpl *UserRepositoryImpl) FindById(id int) (*model.User, err
 
 }
 func (userRepositoryImpl *UserRepositoryImpl) DeleteById(id int) error {
+
+	userRepositoryImpl.db.Transaction(func(tx *gorm.DB) error {
+		err := tx.Delete(&model.User{}, id).Error
+		if err != nil {
+			return err
+		}
+
+		err = tx.Where("user_id = ?", id).Delete(&model.Card{}).Error
+		if err != nil {
+			return err
+		}
+
+		return nil
+	})
 	// 아래의 방법으로 참조를 끊어버릴수도 있다.
-	userRepositoryImpl.db.Model(&model.User{}).Association("Cards").Clear()
+	//userRepositoryImpl.db.Model(&model.User{}).Association("Cards").Clear()
 	// db.Model(&user).Association("Languages").Delete([]Language{languageZH, languageEN})
 	// db.Model(&user).Association("Languages").Clear()
-
-	// Transaction start
-	err := userRepositoryImpl.db.Delete(&model.User{}, id).Error
-
-	if err != nil {
-		return err
-	}
 
 	return nil
 }
