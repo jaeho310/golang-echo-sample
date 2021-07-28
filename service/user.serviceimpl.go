@@ -24,20 +24,12 @@ func (userServiceImpl *UserServiceImpl) CreateUser(user *model.User) (*model.Use
 func (userServiceImpl *UserServiceImpl) DeleteUser(id int) error {
 
 	// transaction 처리가 필요한 모든 메서드에, tx 객체를 전달
-	// return도 transaction객체를 돌려줘야한다.
-	// 모든 메서드에 tx를 들고다닌다 vs middleware를 쓴다.
-
+	// 메서드 아규먼트에 tx 추가 vs middleware(echo ctx 공유)를 쓴다 vs 레파지토리에 짠다.
 	err := userServiceImpl.UserRepository.DeleteById(id)
 	if err != nil {
 		//tx.Rollback()
 		return err
 	}
-
-	//err = userServiceImpl.CardRepository.DeleteByUserId(id)
-	//if err != nil {
-	//	//tx.Rollback()
-	//	return err
-	//}
 
 	return nil
 }
