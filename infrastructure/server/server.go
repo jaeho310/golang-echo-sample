@@ -63,6 +63,11 @@ func (server Server) Init() {
 	e.Renderer = renderer
 	e.Static("/static", "view/static")
 	web.WebController{}.Init(e)
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"http://localhost:8081"},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+	}))
+
 
 	// api controller setting
 	cardController := server.InjectCardController()
