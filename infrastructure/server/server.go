@@ -64,7 +64,7 @@ func (server Server) Init() {
 	e.Static("/static", "view/static")
 	web.WebController{}.Init(e)
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{"http://localhost:8081"},
+		AllowOrigins: []string{"*"},
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 	}))
 
