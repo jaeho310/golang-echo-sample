@@ -1,8 +1,7 @@
 # golang web sample
 ## 요약
 - golang echo framework를 사용한 api server sample
-- 동작확인을 위해 간단하게 프론트단을 개발(웹브라우저에서 접근 가능)
-- postman, curl 등 rest client를 사용하여도 가능
+- 동작확인을 위해 간단하게 프론트단을 개발
 
 
 ## profile파일 추가
