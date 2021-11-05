@@ -125,8 +125,8 @@ testify와 mockery를 사용한다.
 #No information about specific project should appear here
 
 #----- Default SonarQube server
-sonar.host.url=http://192.168.102.127:9000/
-sonar.login=2a09a7d77a7c54c94b33b5a7270b30907d023127
+sonar.host.url=url 입력
+sonar.login=token 입력
 
 # #----- Default source code encoding
 sonar.sourceEncoding=UTF-8
