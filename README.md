@@ -7,12 +7,11 @@
 
 ## profile파일 추가
 - profile을 파일로 관리하여 원하는 자원을 편하게 쓸수 있게 한다.
-    - (ex 매번 코브라 아규먼트나, 환경변수 등으로 여러개의 변수를 관리하는 방식은 생산성이 떨어진다.)
-- 현재는 런타임시에만 일시적으로 환경변수를 적용시켜 관리하지만 yaml파일로 변경 예정
+- 런타임시에만 일시적으로 환경변수를 적용시켜 관리
 
 ## Architecture
 - 3tier architecture(clean architecture)를 사용
-  - layered architecture중 국내에서 가장 많이 사용하는 구조(전자정부 프레임워크의 기본 아키텍쳐)
+  - layered architecture중 국내에서 가장 많이 사용하는 구조
   - presentation layer, business layer, data access layer 로 나뉜다.
 - presentation 계층(interfaces/controller)
   - 외부와 인터페이스 역할을 한다.
