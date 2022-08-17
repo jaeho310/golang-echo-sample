@@ -1,7 +1,7 @@
 # golang web sample
 ## 요약
 - golang echo framework를 사용한 api server sample
-- 동작확인을 위해 간단하게 프론트단을 개발
+- 동작확인을 위해 간단한  개발
 
 
 ## profile파일 추가
