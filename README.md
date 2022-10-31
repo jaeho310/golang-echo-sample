@@ -54,6 +54,8 @@ func (UserServiceImpl) NewUserServiceImpl(repository repository.UserRepository) 
 	return &UserServiceImpl{repository}
 }
 ```
+해당 패키지에서 주입오류를 확인하고 싶으면 New의 리턴값으로 인터페이스를 리턴해도 된다.<br>
+golang에서 인터페이스를 리턴하면 마샬링등에서 에러가 나는 경우가 있지만 레이어를 구축할때는 고려하지 않아도 된다.
 
 ## testing
 - 사용 라이브러리
