@@ -54,7 +54,9 @@ func (UserServiceImpl) NewUserServiceImpl(repository repository.UserRepository) 
 	return &UserServiceImpl{repository}
 }
 ```
-해당 패키지에서 주입오류를 확인하고 싶으면 New의 리턴값으로 인터페이스를 리턴해도 된다.<br>
+controller, service, repository로 계층을 나눴지만, controller보다는 handler라는 이름을 사용할것을 추천한다.
+controller는 operator를 구축할때 종종 사용되는 네이밍으로 고랭 네이밍컨벤션에 위반될수 있으므로 애플리케이션 확장시 주의한다.
+주입오류를 파일에서 확인하고 싶으면 New의 리턴값으로 인터페이스를 리턴하면 된다.<br>
 golang에서 인터페이스를 리턴하면 마샬링등에서 에러가 나는 경우가 있지만 레이어를 구축할때는 고려하지 않아도 된다.
 
 ## testing
